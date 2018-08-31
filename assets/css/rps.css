@@ -1,0 +1,71 @@
+body {
+    padding: 10px;
+}
+
+.jumbotron {
+    /* background-image: url(../../assets/images/rock_paper_scissors_by_smashmethod.jpg);
+    background-size: cover;
+    background-position: center; */
+    background-image: url(../../assets/images/rps.jpg);
+    background-color: #3569c9;
+    background-size: 850px 450px;
+    background-repeat: no-repeat;
+    background-position: 150% 50%;
+    /* height: 300px; */
+    border-radius: 5px;
+    color: white;
+}
+
+.game {
+    margin-top: 5%;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #c4c4c4;
+    border-radius: 3px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#chat1 {
+    margin-top: 10%;
+}
+
+#chat2 {
+    padding: 20px;
+    border: 1px solid #c4c4c4;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#chatbox {
+    border: 1px solid #c4c4c4;
+    border-radius: 3px;
+    text-align: left; 
+    height: 25%;
+    overflow: auto;
+}
+
+.player {
+    text-align: center;
+}
+
+.choices {
+    margin: 5px;
+}
+
+#enter {
+    text-align: center;
+    color: red;
+}
+
+#winner {
+    text-align: center;
+    font-size: 5vw;
+    font-weight: bold;
+}
+
+img:hover{
+    cursor: pointer;
+   }
