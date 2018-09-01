@@ -75,7 +75,10 @@
       database.ref("players/2").update({
         choice: null,
       });
-      $(".choices").animate({height: "50px", width: "50px"});
+      $(".choices").animate({
+        height: "50px",
+        width: "50px"
+      });
     }
 
     // function turn() {
@@ -135,14 +138,28 @@
       });
     }
 
-    // function resetButtons(id) {
-    //   $(id).animate({height: "50px", width: "50px"});
+    // function animateButtons(id) {
+    //   if ($(id).attr("class", "animate")) {
+    //     $(id).animate({
+    //       height: "100px",
+    //       width: "100px"
+    //     });
+    //   };
+    //   else {
+    //     $(".choices").animate({
+    //       height: "50px",
+    //       width: "50px"
+    //     });
+    //   }
     // }
 
     function buttonValue(player, id, choice) {
       $(document).on("click", id, function () {
         $("#winner").empty();
-        $(id).animate({height: "100px", width: "100px"});
+        $(id).animate({
+          height: "100px",
+          width: "100px"
+        });
         database.ref(player).update({
           choice: choice,
         });
@@ -187,13 +204,13 @@
 
     database.ref().on("value", function (snapshot) {
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Scissors") {
-        $("#winner").text("Player 1 Wins!");
+        $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
         addWin("players/1");
         addLoss("players/2");
       }
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Paper") {
-        $("#winner").text("Player 2 Wins!");
+        $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
         addWin("players/2/wins");
         addLoss("players/1/losses");
@@ -203,13 +220,13 @@
         clearChoice();
       }
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Scissors") {
-        $("#winner").text("Player 2 Wins!");
+        $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
         addWin("players/2/wins");
         addLoss("players/1/losses");
       }
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Rock") {
-        $("#winner").text("Player 1 Wins!");
+        $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
         addWin("players/1/wins");
         addLoss("players/2/losses");
@@ -219,13 +236,13 @@
         clearChoice();
       }
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Rock") {
-        $("#winner").text("Player 2 Wins!");
+        $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
         addWin("players/2/wins");
         addLoss("players/1/losses");
       }
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Paper") {
-        $("#winner").text("Player 1 Wins!");
+        $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
         addWin("players/1/wins");
         addLoss("players/2/losses");
@@ -258,7 +275,7 @@
       $("#chat").val('');
     })
 
-    database.ref().once("value").then(function (snapshot) {
+    database.ref().once("value").then(function () {
       updateChat();
     });
 
