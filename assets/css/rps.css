@@ -55,6 +55,15 @@ h1 {
     margin: 5px;
 }
 
+.choices:hover {
+    box-shadow: 0px 0px 10px black;
+    border-radius: 100px;
+}
+
+/* .choices:active {
+    box-shadow: 0px 0px 20px #8e002c;
+} */
+
 #enter {
     text-align: center;
     color: red;
@@ -66,6 +75,7 @@ h1 {
     font-weight: bold;
 }
 
-img:hover{
+img:hover {
     cursor: pointer;
    }
+
