@@ -160,6 +160,10 @@
           height: "100px",
           width: "100px"
         });
+        $(id).animate({
+          height: "50px",
+          width: "50px"
+        });
         database.ref(player).update({
           choice: choice,
         });
@@ -284,6 +288,4 @@
     // increment turn()
     // increment wins()
     // increment losses()
-    // make chat work
-
   });
