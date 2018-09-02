@@ -78,32 +78,28 @@
     }
 
     // function turn() {
-    //   turn++;
+    //   var turn = 1;
     //   database.ref().update({
-    //     turn: turn,
+    //     turn: turn++,
     //   });
     // }
 
 
-    // function addWin(player) {
-    //   var wins = 0;
-    //   database.ref(player).update({
-    //     wins: wins++,
-    //   });
-    // }
+    function addWin(player) {
+      database.ref(player).update({
+        wins: wins++,
+      });
+    }
 
-    // function addLoss(player) {
-    //   var losses = 0;
-    //   database.ref(player).update({
-    //     losses: 1,
-    //   });
-    // }
+    function addLoss(player) {
+      database.ref(player).update({
+        losses: losses++,
+      });
+    }
 
 
     function addPlayer(name, wins, losses) {
       var name = $("#name").val().trim();
-      var wins = 0;
-      var losses = 0;
       database.ref().once("value").then(function (snapshot) {
         if (snapshot.child("players/1/name").exists()) {
           database.ref("players/2").set({
@@ -112,6 +108,9 @@
             losses: losses,
           });
           player2Info();
+          // database.ref().update({
+          //   turn: 1,
+          // })
         } else {
           database.ref("players/1").set({
             name: name,
@@ -133,21 +132,6 @@
         $('#join').prop('disabled', true);
       });
     }
-
-    // function animateButtons(id) {
-    //   if ($(id).attr("class", "animate")) {
-    //     $(id).animate({
-    //       height: "100px",
-    //       width: "100px"
-    //     });
-    //   };
-    //   else {
-    //     $(".choices").animate({
-    //       height: "50px",
-    //       width: "50px"
-    //     });
-    //   }
-    // }
 
     
     function buttonValue(player, id, choice) {
@@ -208,58 +192,67 @@
         $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
-        // addWin("players/1/wins");
-        // addLoss("players/2/losses");
+        addWin("players/1");
+        addLoss("players/2");
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Paper") {
         $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
-        // addWin("players/2/wins");
-        // addLoss("players/1/losses");
+        addWin("players/2");
+        addLoss("players/1");
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Rock") {
         $("#winner").text("It's a Tie!");
         setTimeout(function() {$("#winner").empty();}, 3000);
         clearChoice();
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Scissors") {
         $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
-        // addWin("players/2/wins");
-        // addLoss("players/1/losses");
+        addWin("players/2");
+        addLoss("players/1");
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Rock") {
         $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
-        // addWin("players/1/wins");
-        // addLoss("players/2/losses");
+        addWin("players/1");
+        addLoss("players/2");
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Paper") {
         $("#winner").text("It's a Tie!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Rock") {
         $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
-      //   addWin("players/2/wins");
-      //   addLoss("players/1/losses");
+        addWin("players/2");
+        addLoss("players/1");
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Paper") {
         $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
-        // addWin("players/1/wins");
-        // addLoss("players/2/losses");
+        addWin("players/1");
+        addLoss("players/2");
+        turn();
       }
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Scissors") {
         $("#winner").text("It's a Tie!");
         clearChoice();
         setTimeout(function() {$("#winner").empty();}, 3000);
+        turn();
       }
     })
 
