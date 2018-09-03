@@ -77,26 +77,6 @@
       });
     }
 
-    // function turn() {
-    //   var turn = 1;
-    //   database.ref().update({
-    //     turn: turn++,
-    //   });
-    // }
-
-
-    function addWin(player) {
-      database.ref(player).update({
-        wins: wins++,
-      });
-    }
-
-    function addLoss(player) {
-      database.ref(player).update({
-        losses: losses++,
-      });
-    }
-
 
     function addPlayer(name, wins, losses) {
       var name = $("#name").val().trim();
@@ -134,7 +114,7 @@
     }
 
     
-    function buttonValue(player, id, choice) {
+    function buttonValue(player, id, choice, choiceid) {
       $(document).on("click", id, function () {
         $("#winner").empty();
         $(id).animate({
@@ -148,6 +128,7 @@
         database.ref(player).update({
           choice: choice,
         });
+        $(choiceid).text("You chose: " + choice);
       });
     }
 
@@ -167,15 +148,15 @@
     });
 
     database.ref("players/1").once('value').then(function () {
-      buttonValue("players/1", "#paper1", "Paper");
-      buttonValue("players/1", "#rock1", "Rock");
-      buttonValue("players/1", "#scissors1", "Scissors");
+      buttonValue("players/1", "#paper1", "Paper", "#choice1");
+      buttonValue("players/1", "#rock1", "Rock", "#choice1");
+      buttonValue("players/1", "#scissors1", "Scissors", "#choice1");
     });
 
     database.ref("players/2").once('value').then(function () {
-      buttonValue("players/2", "#paper2", "Paper");
-      buttonValue("players/2", "#rock2", "Rock");
-      buttonValue("players/2", "#scissors2", "Scissors");
+      buttonValue("players/2", "#paper2", "Paper", "#choice2");
+      buttonValue("players/2", "#rock2", "Rock", "#choice2");
+      buttonValue("players/2", "#scissors2", "Scissors", "#choice2");
     });
 
 
@@ -186,12 +167,32 @@
       $('#join').prop('disabled', false);
     });
 
+        // function turn() {
+    //   var turn = 1;
+    //   database.ref().update({
+    //     turn: turn++,
+    //   });
+    // }
+
+
+    function addWin(player) {
+      database.ref(player).update({
+        wins: wins++,
+      });
+    }
+
+    function addLoss(player) {
+      database.ref(player).update({
+        losses: losses++,
+      });
+    }
+
 
     database.ref().on("value", function (snapshot) {
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Scissors") {
         $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         addWin("players/1");
         addLoss("players/2");
         turn();
@@ -199,21 +200,21 @@
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Paper") {
         $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         addWin("players/2");
         addLoss("players/1");
         turn();
       }
       if (snapshot.child("players/1/choice").val() === "Rock" && snapshot.child("players/2/choice").val() === "Rock") {
         $("#winner").text("It's a Tie!");
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         clearChoice();
         turn();
       }
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Scissors") {
         $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         addWin("players/2");
         addLoss("players/1");
         turn();
@@ -221,7 +222,7 @@
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Rock") {
         $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         addWin("players/1");
         addLoss("players/2");
         turn();
@@ -229,13 +230,13 @@
       if (snapshot.child("players/1/choice").val() === "Paper" && snapshot.child("players/2/choice").val() === "Paper") {
         $("#winner").text("It's a Tie!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         turn();
       }
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Rock") {
         $("#winner").text(snapshot.child("players/2/name").val() + " Wins!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         addWin("players/2");
         addLoss("players/1");
         turn();
@@ -243,7 +244,7 @@
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Paper") {
         $("#winner").text(snapshot.child("players/1/name").val() + " Wins!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         addWin("players/1");
         addLoss("players/2");
         turn();
@@ -251,7 +252,7 @@
       if (snapshot.child("players/1/choice").val() === "Scissors" && snapshot.child("players/2/choice").val() === "Scissors") {
         $("#winner").text("It's a Tie!");
         clearChoice();
-        setTimeout(function() {$("#winner").empty();}, 3000);
+        setTimeout(function() {$("#winner").empty();  $("#choice1").empty(); $("#choice2").empty();}, 3000);
         turn();
       }
     })
@@ -295,9 +296,4 @@
         $("#send").click();
       }
     });
-
-    // To Do:
-    // increment turn()
-    // increment wins()
-    // increment losses()
   });
