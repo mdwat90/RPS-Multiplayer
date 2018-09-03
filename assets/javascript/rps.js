@@ -42,7 +42,7 @@
         $("#p2").append(paper2 + rock2 + scissors2);
         $('#join').prop('disabled', true);
       });
-      database.ref("players/2").on("value", function (player2) {
+      database.ref("players/2").once("value").then(function (player2) {
         $("#chatbox").append("<p>" + player2.val().name + " is connected!" + "</p>");
       });
       disconnect("players/2");
@@ -53,7 +53,7 @@
         $("#player1").text(player1.val().name);
         $("#p1").append(paper1 + rock1 + scissors1);
       });
-      database.ref("players/1").on("value", function (player1) {
+      database.ref("players/1").once("value").then(function (player1) {
         $("#chatbox").append("<p>" + player1.val().name + " is connected!" + "</p>");
       });
       disconnect("players/1");
