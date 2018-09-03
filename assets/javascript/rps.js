@@ -299,11 +299,27 @@
       }
     })
 
+    // $(document).ready(function() {
+      var obj = document.createElement("audio");
+      obj.src = "assets/audio/slow-spring-board.ogg";
+      obj.volume = 0.1;
+      obj.autoPlay = false;
+      obj.preLoad = true;
+      obj.controls = true;
+    
+    //   $(".playSound").click(function() {
+    //     obj.play();
+    //     // obj.pause();
+    //   });
+    // });
+    
+
 
     function updateChat() {
       database.ref("chat").on("value", function (snapshot) {
         if (snapshot.child("message").exists()) {
           $("#chatbox").append("<p>" + snapshot.val().message + "</p>");
+          obj.play();
         }
       })
       database.ref(".info/connected").on("value", function (snap) {
