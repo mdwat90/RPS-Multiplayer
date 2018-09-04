@@ -299,20 +299,13 @@
       }
     })
 
-    // $(document).ready(function() {
+
       var obj = document.createElement("audio");
       obj.src = "assets/audio/slow-spring-board.ogg";
-      obj.volume = 0.1;
+      obj.volume = 0.7;
       obj.autoPlay = false;
       obj.preLoad = true;
       obj.controls = true;
-    
-    //   $(".playSound").click(function() {
-    //     obj.play();
-    //     // obj.pause();
-    //   });
-    // });
-    
 
 
     function updateChat() {
