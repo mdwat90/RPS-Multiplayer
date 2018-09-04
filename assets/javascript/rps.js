@@ -27,7 +27,6 @@
 
     $("#enter").hide();
 
-
     function disconnect(player) {
       database.ref(".info/connected").on("value", function (snap) {
         if (snap.val()) {
@@ -79,9 +78,13 @@
             losses: losses,
           });
           player2Info();
-          // database.ref().update({
-          //   turn: 1,
-          // })
+          $("#send").on("click", function () {
+            var message = $("#chat").val().trim();
+            database.ref("chat").set({
+              message: message,
+            });
+            $("#chat").val('');
+          })
         } else {
           database.ref("players/1").set({
             name: name,
@@ -89,6 +92,13 @@
             losses: losses,
           });
           player1Info();
+          $("#send").on("click", function () {
+            var message = $("#chat").val().trim();
+            database.ref("chat").set({
+              message: message,
+            });
+            $("#chat").val('');
+          })
         }
       });
     };
@@ -300,12 +310,12 @@
     })
 
 
-      var obj = document.createElement("audio");
-      obj.src = "assets/audio/slow-spring-board.ogg";
-      obj.volume = 0.7;
-      obj.autoPlay = false;
-      obj.preLoad = true;
-      obj.controls = true;
+    var obj = document.createElement("audio");
+    obj.src = "assets/audio/slow-spring-board.ogg";
+    obj.volume = 0.7;
+    obj.autoPlay = false;
+    obj.preLoad = true;
+    obj.controls = true;
 
 
     function updateChat() {
@@ -321,14 +331,6 @@
         }
       })
     }
-
-    $("#send").on("click", function () {
-      var message = $("#chat").val().trim();
-      database.ref("chat").set({
-        message: message,
-      });
-      $("#chat").val('');
-    })
 
     database.ref().once("value").then(function () {
       updateChat();
