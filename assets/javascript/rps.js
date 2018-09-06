@@ -312,7 +312,7 @@
 
     var obj = document.createElement("audio");
     obj.src = "assets/audio/slow-spring-board.ogg";
-    obj.volume = 0.7;
+    obj.volume = 0.5;
     obj.autoPlay = false;
     obj.preLoad = true;
     obj.controls = true;
